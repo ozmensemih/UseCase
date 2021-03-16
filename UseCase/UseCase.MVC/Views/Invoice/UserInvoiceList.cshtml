@@ -1,0 +1,56 @@
+﻿@model List<UseCase.DTO.InvoiceDto>
+@{
+    ViewData["Title"] = "Ödenmiş Faturalar";
+    int counter = 0;
+}
+<h2>Faturalar Listesi</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fatura Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Invoice Date</th>
+            <th scope="col">Expiry Date</th>
+            <th scope="col">Payment Date</th>
+            <th scope="col">Durum</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+           
+        <tr>
+            <th scope="row">@(++counter)</th>
+            <td>@item.InvoiceName</td>
+            <td>@item.InvoicePrice</td>
+            <td>@item.InvoiceDate</td>
+            <td>@item.InvoiceExpiryDate</td>
+            <td>@item.PaymentDate</td>              
+            <td>
+                @if (item.PaymentExpired == "guncel")
+                {
+                    @("Fatura Kesilmedi");
+                }
+                @if (item.PaymentExpired == "gecikti")
+                {
+                    <a asp-action="Paid" asp-controller="Invoice" asp-route-id="@item.Id"> Gecikti- Ödeme Yap</a>
+                }
+                @if (item.PaymentExpired == "odemeyap")
+                {
+                    <a asp-action="Paid" asp-controller="Invoice" asp-route-id="@item.Id">  Ödeme Yap</a>
+                }
+                @if (item.PaymentExpired == "odendi")
+                {
+                    @("Ödendi")
+                }
+            </td>
+
+        </tr>
+        }
+    
+
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+﻿@using UseCase.MVC.App_Start
+@{
+    Layout = "_Layout";
+
+    AuthBuilder authBuilder = new AuthBuilder();
+    UserLoginData user = authBuilder.GetUserData(Context);
+    ViewContext.HttpContext.Items.Add("User", user);
+
+}

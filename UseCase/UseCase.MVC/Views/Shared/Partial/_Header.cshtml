@@ -1,0 +1,62 @@
+﻿@model UseCase.MVC.App_Start.UserLoginData
+<header>
+    
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Use Case</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Login" asp-action="Index">Login Abone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="LoginBayi" asp-action="Index">Login Bayi</a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    @if (User.IsInRole("Cashier"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Subscription" asp-action="Index">Abone Sorgulama</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Subscription" asp-action="Add">Abone Yap</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+
+                            <a class="nav-link text-dark" asp-action="UserInvoiceListPaymentStatus" asp-controller="Invoice" asp-route-id="@Model.Id">Ödenmemiş Faturalar</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-action="UserInvoiceListPaymentStatus" asp-controller="Invoice" asp-route-id="@Model.Id" asp-route-paymentStatus="true">Ödenmiş Ekstralar</a>
+                        </li>
+                    }
+                }
+            </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="navbar-text">
+                    Hoşgeldin, @Model.FullName
+                </span>
+                if (!User.IsInRole("Cashier"))
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignOut">Çıkış Yap</a>
+                }
+                else
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-controller="LoginBayi" asp-action="SignOut">Çıkış Yap</a>
+                }
+            }
+        </div>
+    </nav>
+
+</header>

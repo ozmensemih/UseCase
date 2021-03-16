@@ -1,0 +1,65 @@
+﻿@model UseCase.DTO.SearchCustomerDto
+@{
+    ViewData["Title"] = "Customer Sorgula";
+    UseCase.DTO.CustomerDto customer = ViewBag.Customer;
+}
+
+<div class="text-left">
+    <h1 class="display-4">Bireysel Müşteri</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="IdentityNumber">IdentityNumber</label>
+            <input type="text" class="form-control" asp-for="IdentityNumber" aria-describedby="IdentityNumber" placeholder="IdentityNumber">
+            <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+    </form>
+</div>
+
+@if (customer != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">IdentityNumber</th>
+                <th scope="col">Name - LastName</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Deposit</th>
+                <th scope="col">Fatura listesi</th>
+                <th scope="col">Abone Durumu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>@customer.IdentityNumber</td>
+                <td>@customer.Name @customer.LastName</td>
+                <td>@customer.Address</td>
+                <td>@customer.Deposit</td>
+                <td><a  asp-action="UserInvoiceList" asp-controller="Invoice"  asp-route-id="@customer.Id">Faturalar</a></td>
+                <td>
+                    @if (customer.IsActive == true)
+                    {
+                        <a asp-action="Close" asp-controller="Subscription" asp-route-id="@customer.Id"> Aboneliği Sonlandır</a>
+                    }
+                    else
+                    {
+                        @("Pasif")
+                    }
+                </td>
+                <td>
+                    @if (customer.Deposit > 0)
+                    {
+                        <a asp-action="DepositRefund" asp-controller="Subscription" asp-route-id="@customer.Id"> Depozito iade et</a>
+                    }
+                    else
+                    {
+                        @("Depozito ödenmiş")
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

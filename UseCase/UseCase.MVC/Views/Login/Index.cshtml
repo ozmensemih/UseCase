@@ -1,0 +1,35 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="text-left">
+    <h1 class="display-4">LOGIN ABONE</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="UserName">User Name</label>
+            <input type="text" class="form-control" asp-for="UserName" aria-describedby="UserName" placeholder="User Name" required/>
+        </div>
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" asp-for="Password"  placeholder="Password" required />
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="SubscriptionType"  value="1" required>
+                <label class="form-check-label" for="SubscriptionType">
+                   Bireysel Müşteri
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="SubscriptionType"  value="2" required />
+                <label class="form-check-label" for="SubscriptionType">
+                    Tüzel Müşteri
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+    </form>
+</div>

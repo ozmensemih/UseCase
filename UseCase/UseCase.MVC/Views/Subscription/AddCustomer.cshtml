@@ -1,0 +1,47 @@
+﻿@model UseCase.DTO.CustomerDto
+@{
+    ViewData["Title"] = "Bireysel Müşteri Ekle";
+}
+<form method="post">
+
+    <div class="form-group">
+        <label for="IdentityNumber" id="IdentityNumberLabel">IdentityNumber</label>
+        <input type="text" class="form-control" asp-for="IdentityNumber" placeholder="IdentityNumber">
+        <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input type="text" class="form-control" asp-for="LastName" placeholder="LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Adress">Adress</label>
+        <input type="text" class="form-control" asp-for="Address" placeholder="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Deposit">Deposit</label>
+        <input type="text" class="form-control" asp-for="Deposit" placeholder="Deposit">
+        <span asp-validation-for="Deposit" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="UserName">UserName</label>
+        <input type="text" class="form-control" asp-for="UserName" placeholder="">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+</form>
